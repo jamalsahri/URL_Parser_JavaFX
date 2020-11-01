@@ -113,13 +113,13 @@ public class FXMLDocumentController implements Initializable {
         String textVal = element.getTextContent();
         String linkVal = href.getNodeValue();
         
-        if(!textVal.isEmpty()){
-            Label text = new Label("Text: "+textVal);
+        if(!textVal.trim().isEmpty()){
+            Label text = new Label("Text: "+textVal.trim());
             text.setStyle(" -fx-font-weight:bold;");
             lv_data.getItems().add(text);
         }
-        if(!linkVal.isEmpty()){
-            Label link = new Label("Link: "+linkVal);
+        if(!linkVal.trim().isEmpty()){
+            Label link = new Label("Link: "+linkVal.trim());
             link.setStyle("-fx-font-weight:bold;");
             lv_data.getItems().add(link);
         }
