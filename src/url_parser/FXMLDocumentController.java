@@ -106,24 +106,28 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public synchronized void addElement(Element element) {
-        NamedNodeMap attributes = element.getAttributes();
-        System.out.println("Text> "+element.getTextContent());
-        
-        Attr href = (Attr) attributes.getNamedItem("href");
-        String textVal = element.getTextContent();
-        String linkVal = href.getNodeValue();
-        
-        if(!textVal.trim().isEmpty()){
-            Label text = new Label("Text: "+textVal.trim());
-            text.setStyle(" -fx-font-weight:bold;");
-            lv_data.getItems().add(text);
+        try{
+            NamedNodeMap attributes = element.getAttributes();
+            System.out.println("Text> "+element.getTextContent());
+
+            Attr href = (Attr) attributes.getNamedItem("href");
+            String textVal = element.getTextContent();
+            String linkVal = href.getNodeValue();
+
+            if(!textVal.trim().isEmpty()){
+                Label text = new Label("Text: "+textVal.trim());
+                text.setStyle(" -fx-font-weight:bold;");
+                lv_data.getItems().add(text);
+            }
+            if(!linkVal.trim().isEmpty()){
+                Label link = new Label("Link: "+linkVal.trim());
+                link.setStyle("-fx-font-weight:bold;");
+                lv_data.getItems().add(link);
+            }
+
+            lv_data.getItems().add(new Label("---"));
+        }catch(Exception ex){
+            errorMessage.setText(ex.getMessage());
         }
-        if(!linkVal.trim().isEmpty()){
-            Label link = new Label("Link: "+linkVal.trim());
-            link.setStyle("-fx-font-weight:bold;");
-            lv_data.getItems().add(link);
-        }
-        
-        lv_data.getItems().add(new Label("---"));
     }
 }
